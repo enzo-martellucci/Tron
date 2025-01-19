@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<StackPane prefHeight="600.0" prefWidth="1000.0" stylesheets="@../assets/styles/global.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uphf.tron.controller.LoginController">
+   <children>
+      <Region maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" styleClass="bg-tunnel">
+         <effect>
+            <ColorAdjust brightness="-0.6" />
+         </effect>
+      </Region>
+      <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="400.0">
+         <children>
+            <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="text-md" text="Username" textFill="WHITE">
+               <font>
+                  <Font size="64.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </Label>
+            <TextField fx:id="txtUsername" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="text-md">
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin>
+            </TextField>
+            <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="text-md" text="Password" textFill="WHITE">
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </Label>
+            <PasswordField fx:id="txtPassword" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#login" styleClass="text-md">
+               <VBox.margin>
+                  <Insets bottom="40.0" />
+               </VBox.margin>
+            </PasswordField>
+            <Label fx:id="lblError" minHeight="-Infinity" minWidth="-Infinity" styleClass="text-sm" textAlignment="CENTER" textFill="RED">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets bottom="20.0" />
+               </padding>
+            </Label>
+            <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#login" styleClass="text-md" text="Login">
+               <VBox.margin>
+                  <Insets bottom="40.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="10.0" left="30.0" right="30.0" top="10.0" />
+               </padding>
+            </Button>
+            <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" styleClass="text-sm">
+               <children>
+                  <Label minHeight="-Infinity" minWidth="-Infinity" text="No account yet ? Register " textFill="WHITE" />
+                  <Label minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#goToRegister" style="-fx-cursor: hand;" text="here" textFill="#0069c2" />
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </VBox>
+   </children>
+</StackPane>

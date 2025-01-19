@@ -1,0 +1,41 @@
+@font-face {
+    font-family: 'Orbitron';
+    src: url('../fonts/Orbitron-Regular.ttf');
+}
+
+.root {
+    -fx-font-family: "Orbitron"
+}
+
+.text-lg {
+    -fx-font-size: 3em;
+}
+
+.text-md {
+    -fx-font-size: 2em;
+}
+
+.text-sm {
+    -fx-font-size: 1em;
+}
+
+.bg-tunnel {
+    -fx-background-image: url("../images/tunnel.png");
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+    -fx-background-repeat: no-repeat;
+}
+
+.bg-poster {
+    -fx-background-image: url("../images/poster.jpg");
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+    -fx-background-repeat: no-repeat;
+}
+
+.bg-grid {
+    -fx-background-image: url("../images/grid.jpg");
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+    -fx-background-repeat: no-repeat;
+}

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" styleClass="text-lg" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uphf.tron.controller.ShopController">
+   <children>
+      <Region maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" styleClass="bg-grid">
+         <effect>
+            <ColorAdjust brightness="-0.6" />
+         </effect>
+      </Region>
+      <HBox minHeight="-Infinity" minWidth="-Infinity">
+         <children>
+            <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goToHome">
+               <graphic>
+                  <FontIcon iconLiteral="fas-arrow-circle-left" />
+               </graphic>
+               <HBox.margin>
+                  <Insets left="10.0" top="10.0" />
+               </HBox.margin>
+            </Button>
+            <VBox alignment="CENTER" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" HBox.hgrow="ALWAYS">
+               <children>
+                  <StackPane maxHeight="-Infinity" maxWidth="-Infinity" style="-fx-border-color: WHITE;">
+                     <children>
+                        <ImageView fitHeight="256.0" fitWidth="256.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/images/tile.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="128.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/images/basic.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </StackPane>
+                  <HBox alignment="CENTER" spacing="20.0">
+                     <children>
+                        <Button mnemonicParsing="false" style="-fx-background-color: transparent;">
+                           <graphic>
+                              <FontIcon iconColor="WHITE" iconLiteral="fas-angle-left" iconSize="60" />
+                           </graphic>
+                        </Button>
+                        <Label alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="200.0" text="Burgundy" textFill="WHITE" />
+                        <Button mnemonicParsing="false" style="-fx-background-color: transparent;">
+                           <graphic>
+                              <FontIcon iconColor="WHITE" iconLiteral="fas-angle-right" iconSize="60" />
+                           </graphic>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <Label text="500" textFill="WHITE">
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="fas-dollar-sign" />
+                     </graphic>
+                     <VBox.margin>
+                        <Insets bottom="30.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Button mnemonicParsing="false" text="Unlock" />
+               </children>
+            </VBox>
+            <ScrollPane hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0">
+               <content>
+                  <VBox fx:id="vBoxMoto" />
+               </content>
+            </ScrollPane>
+         </children>
+      </HBox>
+   </children>
+   <stylesheets>
+      <URL value="@../assets/styles/global.css" />
+      <URL value="@../assets/styles/shop.css" />
+   </stylesheets>
+</StackPane>

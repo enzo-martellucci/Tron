@@ -1,0 +1,52 @@
+CREATE TABLE IF NOT EXISTS moto (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL UNIQUE,
+    price REAL NOT NULL,
+    speed REAL NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS skin (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    price REAL NOT NULL,
+    image BLOB NOT NULL,
+    color TEXT NOT NULL,
+    id_moto REFERENCES moto(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS inventory (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    coins INTEGER NOT NULL,
+    level REAL NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS inventory_item (
+    id_inventory REFERENCES inventory(id) ON DELETE CASCADE,
+    id_moto REFERENCES moto(id) ON DELETE CASCADE,
+    id_skin REFERENCES skin(id) ON DELETE CASCADE,
+    PRIMARY KEY (id_inventory, id_moto, id_skin)
+);
+
+CREATE TABLE IF NOT EXISTS player (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username TEXT NOT NULL UNIQUE,
+    password TEXT NOT NULL,
+    id_inventory REFERENCES inventory(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS game (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    datetime TEXT NOT NULL,
+    id_player REFERENCES player(id) ON DELETE CASCADE,
+    rank_player INTEGER NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS ai_player (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username TEXT NOT NULL,
+    difficulty TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS game_ai_player (
+    id_game REFERENCES game(id) ON DELETE CASCADE,
+    id_ai_player REFERENCES ai_player(id) ON DELETE CASCADE
+);
