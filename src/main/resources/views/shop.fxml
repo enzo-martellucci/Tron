@@ -13,8 +13,9 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
-
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" styleClass="text-lg" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uphf.tron.controller.ShopController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" styleClass="text-lg"
+           xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.uphf.tron.controller.ShopController">
    <children>
       <Region maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" styleClass="bg-grid">
          <effect>
@@ -33,14 +34,23 @@
             </Button>
             <VBox alignment="CENTER" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" HBox.hgrow="ALWAYS">
                <children>
-                  <StackPane maxHeight="-Infinity" maxWidth="-Infinity" style="-fx-border-color: WHITE;">
+                  <!-- StackPane contenant la moto et l'arrière-plan animé -->
+                  <StackPane maxHeight="256" maxWidth="-256" style="-fx-border-color: WHITE;">
                      <children>
-                        <ImageView fitHeight="256.0" fitWidth="256.0" pickOnBounds="true" preserveRatio="true">
+                        <!-- Deux images pour créer l'effet de scrolling infini sous la moto -->
+                        <ImageView fx:id="bgTile1" fitHeight="256.0" fitWidth="256.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../assets/images/tile.png" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="128.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="bgTile2" fitHeight="256.0" fitWidth="256.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/images/tile.png" />
+                           </image>
+                        </ImageView>
+
+                        <!-- Moto qui reste au centre -->
+                        <ImageView fx:id="motoImage" fitHeight="128.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../assets/images/basic.png" />
                            </image>
@@ -54,7 +64,8 @@
                               <FontIcon iconColor="WHITE" iconLiteral="fas-angle-left" iconSize="60" />
                            </graphic>
                         </Button>
-                        <Label alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="200.0" text="Burgundy" textFill="WHITE" />
+                        <Label alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                               minWidth="-Infinity" prefWidth="200.0" text="Burgundy" textFill="WHITE" />
                         <Button mnemonicParsing="false" style="-fx-background-color: transparent;">
                            <graphic>
                               <FontIcon iconColor="WHITE" iconLiteral="fas-angle-right" iconSize="60" />
