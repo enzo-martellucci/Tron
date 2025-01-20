@@ -35,6 +35,8 @@
 		<java.version>21</java.version>
 		<javafx.version>21</javafx.version>
 		<javafx.maven.plugin.version>0.0.8</javafx.maven.plugin.version>
+		<maven.compiler.source>21</maven.compiler.source>
+		<maven.compiler.target>21</maven.compiler.target>
 	</properties>
 
 	<dependencies>

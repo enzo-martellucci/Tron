@@ -33,15 +33,15 @@ public class LoginController
     {
         this.shopService.getAllMoto();
 
-//        try
-//        {
-//            this.securityService.login(this.txtUsername.getText(), this.txtPassword.getText());
-//            this.sceneController.setScene("home");
-//            this.txtUsername.clear();
-//            this.txtPassword.clear();
-//            this.lblError.setText("");
-//        }
-//        catch (IllegalArgumentException e){ this.lblError.setText(e.getMessage()); }
+        try
+        {
+            this.securityService.login(this.txtUsername.getText(), this.txtPassword.getText());
+            this.sceneController.setScene("home");
+            this.txtUsername.clear();
+            this.txtPassword.clear();
+            this.lblError.setText("");
+        }
+        catch (IllegalArgumentException e){ this.lblError.setText(e.getMessage()); }
     }
 
     public void goToRegister()
