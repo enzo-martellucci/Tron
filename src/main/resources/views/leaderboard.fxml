@@ -2,25 +2,200 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<StackPane prefHeight="600.0" prefWidth="1000.0" stylesheets="@../assets/styles/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane prefHeight="600.0" prefWidth="1000.0" stylesheets="@../assets/styles/global.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Region maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" styleClass="bg-poster">
          <effect>
             <ColorAdjust brightness="-0.6" />
          </effect>
       </Region>
-      <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="600.0" spacing="40.0">
-         <children>
-            <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="text-lg" text="Leaderboard" />
-         </children>
-         <padding>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-         </padding>
-      </VBox>
+      <SplitPane dividerPositions="0.1" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+        <items>
+            <SplitPane dividerPositions="0.5, 0.5, 0.5" prefHeight="160.0" prefWidth="200.0">
+              <items>
+                  <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="0.0" prefWidth="464.0" styleClass="text-lg" text="Leaderboard" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="157.0" prefWidth="503.0" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
+                  <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="0.0" prefWidth="464.0" styleClass="text-lg" text="History" />
+              </items>
+            </SplitPane>
+            <SplitPane dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0" styleClass="bg-grid">
+              <items>
+                  <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <VBox prefHeight="39.0" prefWidth="495.0">
+                           <children>
+                              <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goToHome" prefHeight="41.0" prefWidth="63.0">
+                                 <graphic>
+                                    <FontIcon iconLiteral="fas-arrow-circle-left" iconSize="30" />
+                                 </graphic>
+                              </Button>
+                           </children>
+                        </VBox>
+                        <TextField alignment="TOP_CENTER" mouseTransparent="true" opacity="0.5" prefHeight="39.0" prefWidth="367.0" text="&quot;Name&quot; &quot;Car&quot; &quot;Score&quot;">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </TextField>
+                        <TextField alignment="TOP_CENTER" mouseTransparent="true" opacity="0.5" prefHeight="39.0" prefWidth="367.0" text="&quot;Name&quot; &quot;Car&quot; &quot;Score&quot;">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </TextField>
+                        <TextField alignment="TOP_CENTER" mouseTransparent="true" opacity="0.5" prefHeight="39.0" prefWidth="367.0" text="&quot;Name&quot; &quot;Car&quot; &quot;Score&quot;">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </TextField>
+                        <TextField alignment="TOP_CENTER" mouseTransparent="true" opacity="0.5" prefHeight="39.0" prefWidth="367.0" text="&quot;Name&quot; &quot;Car&quot; &quot;Score&quot;">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </TextField>
+                        <TextField alignment="TOP_CENTER" mouseTransparent="true" opacity="0.5" prefHeight="39.0" prefWidth="367.0" text="&quot;Name&quot; &quot;Car&quot; &quot;Score&quot;">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </TextField>
+                        <TextField alignment="TOP_CENTER" mouseTransparent="true" opacity="0.5" prefHeight="39.0" prefWidth="367.0" text="&quot;Name&quot; &quot;Car&quot; &quot;Score&quot;">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </TextField>
+                        <TextField alignment="TOP_CENTER" mouseTransparent="true" opacity="0.5" prefHeight="39.0" prefWidth="367.0" text="&quot;Name&quot; &quot;Car&quot; &quot;Score&quot;">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </TextField>
+                        <TextField alignment="TOP_CENTER" mouseTransparent="true" opacity="0.5" prefHeight="39.0" prefWidth="367.0" text="&quot;Name&quot; &quot;Car&quot; &quot;Score&quot;">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </TextField>
+                        <TextField alignment="TOP_CENTER" mouseTransparent="true" opacity="0.5" prefHeight="39.0" prefWidth="367.0" text="&quot;Name&quot; &quot;Car&quot; &quot;Score&quot;">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </TextField>
+                     </children>
+                  </VBox>
+                  <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <VBox prefHeight="39.0" prefWidth="496.0" />
+                        <TextField alignment="TOP_CENTER" mouseTransparent="true" opacity="0.5" prefHeight="39.0" prefWidth="367.0" text="&quot;Name&quot; &quot;Car&quot; &quot;Score&quot;">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </TextField>
+                        <TextField alignment="TOP_CENTER" mouseTransparent="true" opacity="0.5" prefHeight="39.0" prefWidth="367.0" text="&quot;Name&quot; &quot;Car&quot; &quot;Score&quot;">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </TextField>
+                        <TextField alignment="TOP_CENTER" mouseTransparent="true" opacity="0.5" prefHeight="39.0" prefWidth="367.0" text="&quot;Name&quot; &quot;Car&quot; &quot;Score&quot;">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </TextField>
+                        <TextField alignment="TOP_CENTER" mouseTransparent="true" opacity="0.5" prefHeight="39.0" prefWidth="367.0" text="&quot;Name&quot; &quot;Car&quot; &quot;Score&quot;">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </TextField>
+                        <TextField alignment="TOP_CENTER" mouseTransparent="true" opacity="0.5" prefHeight="39.0" prefWidth="367.0" text="&quot;Name&quot; &quot;Car&quot; &quot;Score&quot;">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </TextField>
+                        <TextField alignment="TOP_CENTER" mouseTransparent="true" opacity="0.5" prefHeight="39.0" prefWidth="367.0" text="&quot;Name&quot; &quot;Car&quot; &quot;Score&quot;">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </TextField>
+                        <TextField alignment="TOP_CENTER" mouseTransparent="true" opacity="0.5" prefHeight="39.0" prefWidth="367.0" text="&quot;Name&quot; &quot;Car&quot; &quot;Score&quot;">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </TextField>
+                        <TextField alignment="TOP_CENTER" mouseTransparent="true" opacity="0.5" prefHeight="39.0" prefWidth="367.0" text="&quot;Name&quot; &quot;Car&quot; &quot;Score&quot;">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </TextField>
+                        <TextField alignment="TOP_CENTER" mouseTransparent="true" opacity="0.5" prefHeight="39.0" prefWidth="367.0" text="&quot;Name&quot; &quot;Car&quot; &quot;Score&quot;">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </TextField>
+                     </children>
+                  </VBox>
+              </items>
+            </SplitPane>
+        </items>
+      </SplitPane>
    </children>
 </StackPane>
