@@ -1,10 +1,12 @@
 package com.uphf.tron.controller;
 
+import com.uphf.tron.service.SecurityService;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 
@@ -12,8 +14,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Controller
-public class SceneController // implements ApplicationListener<StageReadyEvent>
+public class SceneController
 {
+    @Autowired
+    private SecurityService securityService;
+
+    private static final String INITIAL_SCENE = "shop";
+
     private ApplicationContext applicationContext;
 
     private Stage stage;
@@ -29,7 +36,8 @@ public class SceneController // implements ApplicationListener<StageReadyEvent>
         this.stage.setScene(this.scene);
 
         this.mapScene = new HashMap<>();
-        this.setScene("login");
+        this.securityService.login("Enzo", "123456");
+        this.setScene(INITIAL_SCENE);
 
         stage.setTitle("Tron");
         stage.show();

@@ -7,6 +7,10 @@
     -fx-font-family: "Orbitron"
 }
 
+.button:hover {
+    -fx-cursor: hand;
+}
+
 .text-lg {
     -fx-font-size: 3em;
 }

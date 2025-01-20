@@ -4,18 +4,20 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" styleClass="text-lg"
-           xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
-           fx:controller="com.uphf.tron.controller.ShopController">
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uphf.tron.controller.ShopController">
    <children>
       <Region maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" styleClass="bg-grid">
          <effect>
@@ -26,7 +28,7 @@
          <children>
             <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goToHome">
                <graphic>
-                  <FontIcon iconLiteral="fas-arrow-circle-left" />
+                  <FontIcon iconLiteral="fas-arrow-circle-left" selectionEnd="0" styleClass="text-lg" />
                </graphic>
                <HBox.margin>
                   <Insets left="10.0" top="10.0" />
@@ -34,8 +36,16 @@
             </Button>
             <VBox alignment="CENTER" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" HBox.hgrow="ALWAYS">
                <children>
+                  <Label fx:id="lblMoto" styleClass="text-lg" text="Label" textFill="WHITE">
+                     <VBox.margin>
+                        <Insets bottom="20.0" />
+                     </VBox.margin>
+                     <effect>
+                        <Glow level="0.75" />
+                     </effect>
+                  </Label>
                   <!-- StackPane contenant la moto et l'arrière-plan animé -->
-                  <StackPane maxHeight="256" maxWidth="-256" style="-fx-border-color: WHITE;">
+                  <StackPane fx:id="paneSkin" maxHeight="256" maxWidth="-256" style="-fx-border-color: WHITE;">
                      <children>
                         <!-- Deux images pour créer l'effet de scrolling infini sous la moto -->
                         <ImageView fx:id="bgTile1" fitHeight="256.0" fitWidth="256.0" pickOnBounds="true" preserveRatio="true">
@@ -48,49 +58,81 @@
                               <Image url="@../assets/images/tile.png" />
                            </image>
                         </ImageView>
-
+                        <Rectangle fx:id="rectTrail" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="128.0" stroke="BLACK" strokeType="INSIDE" width="20.0">
+                           <StackPane.margin>
+                              <Insets top="128.0" />
+                           </StackPane.margin>
+                        </Rectangle>
+                        <ImageView fx:id="viewSkin" fitHeight="128.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true">
                         <!-- Moto qui reste au centre -->
-                        <ImageView fx:id="motoImage" fitHeight="128.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../assets/images/basic.png" />
                            </image>
                         </ImageView>
+                        <FontIcon fx:id="iconLock" iconLiteral="fas-lock" iconSize="60" />
+                        <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" spacing="20.0" StackPane.alignment="TOP_CENTER">
+                           <children>
+                              <FontIcon iconColor="WHITE" iconLiteral="fas-tachometer-alt" iconSize="16" />
+                              <ProgressBar fx:id="pbSpeedMoto" maxWidth="1.7976931348623157E308" prefHeight="10.0" progress="0.45" HBox.hgrow="ALWAYS" />
+                           </children>
+                           <padding>
+                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                           </padding>
+                        </HBox>
                      </children>
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
                   </StackPane>
                   <HBox alignment="CENTER" spacing="20.0">
                      <children>
-                        <Button mnemonicParsing="false" style="-fx-background-color: transparent;">
+                        <Button mnemonicParsing="false" onAction="#prevSkin" style="-fx-background-color: transparent;">
                            <graphic>
                               <FontIcon iconColor="WHITE" iconLiteral="fas-angle-left" iconSize="60" />
                            </graphic>
                         </Button>
-                        <Label alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-                               minWidth="-Infinity" prefWidth="200.0" text="Burgundy" textFill="WHITE" />
-                        <Button mnemonicParsing="false" style="-fx-background-color: transparent;">
+                        <Label fx:id="lblSkin" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="200.0" styleClass="text-lg" text="Burgundy" textFill="WHITE" />
+                        <Button mnemonicParsing="false" onAction="#nextSkin" style="-fx-background-color: transparent;">
                            <graphic>
                               <FontIcon iconColor="WHITE" iconLiteral="fas-angle-right" iconSize="60" />
                            </graphic>
                         </Button>
                      </children>
                   </HBox>
-                  <Label text="500" textFill="WHITE">
+                  <Label fx:id="lblPrice" styleClass="text-lg" text="500" textFill="WHITE">
                      <graphic>
                         <FontIcon iconColor="WHITE" iconLiteral="fas-dollar-sign" />
                      </graphic>
                      <VBox.margin>
-                        <Insets bottom="30.0" />
+                        <Insets bottom="10.0" />
                      </VBox.margin>
                   </Label>
-                  <Button mnemonicParsing="false" text="Unlock" />
+                  <Label fx:id="lblError" styleClass="text-sm" textFill="RED">
+                     <padding>
+                        <Insets bottom="20.0" />
+                     </padding>
+                  </Label>
+                  <Button fx:id="btnUnlock" mnemonicParsing="false" onAction="#unlock" styleClass="text-lg" text="Unlock" />
                </children>
             </VBox>
-            <ScrollPane hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0">
+            <ScrollPane fitToHeight="true" hbarPolicy="NEVER" prefViewportHeight="600.0" HBox.hgrow="NEVER">
                <content>
-                  <VBox fx:id="vBoxMoto" />
+                  <VBox fx:id="vBoxMoto" spacing="20.0">
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </padding></VBox>
                </content>
             </ScrollPane>
          </children>
       </HBox>
+      <Label fx:id="lblCoins" styleClass="text-md" textFill="WHITE" StackPane.alignment="BOTTOM_LEFT">
+         <StackPane.margin>
+            <Insets bottom="10.0" left="10.0" />
+         </StackPane.margin>
+         <graphic>
+            <FontIcon iconColor="WHITE" iconLiteral="fas-dollar-sign" />
+         </graphic>
+      </Label>
    </children>
    <stylesheets>
       <URL value="@../assets/styles/global.css" />
