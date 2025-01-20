@@ -6,10 +6,10 @@ import com.uphf.tron.service.ShopService;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
@@ -39,6 +39,11 @@ public class ShopController implements Initializable
 
     @FXML
     private VBox vBoxMoto;
+
+    @FXML
+    private Label lblMoto;
+    @FXML
+    private ProgressBar pbSpeedMoto;
 
     @FXML
     private StackPane paneSkin;
@@ -78,11 +83,12 @@ public class ShopController implements Initializable
         SortedMap<Moto, Boolean> mapMotoOwned = this.shopService.getAllMotoOwned();
 
         ObservableList<Node> list = this.vBoxMoto.getChildren();
+        list.clear();
         for (Moto moto : mapMotoOwned.keySet())
         {
             StackPane stackPane = new StackPane();
-            stackPane.setAlignment(Pos.CENTER);
             stackPane.getStyleClass().add("moto-item");
+            stackPane.setOnMouseClicked(e -> this.selectMoto(moto));
 
             Image image = new Image(new ByteArrayInputStream(moto.getDefaultSkin().getRawImage()), LIST_MOTO_SIZE, LIST_MOTO_SIZE, true, true);
             ImageView imageView = new ImageView(image);
@@ -90,18 +96,11 @@ public class ShopController implements Initializable
 
             if (!mapMotoOwned.get(moto))
             {
-                stackPane.getStyleClass().add("disable");
+                stackPane.setOpacity(0.4);
                 FontIcon icon = new FontIcon(FontAwesomeSolid.LOCK);
                 icon.setIconSize(40);
                 stackPane.getChildren().add(icon);
             }
-
-            Button button = new Button();
-            button.setOnAction(e -> this.selectMoto(moto));
-            button.setOpacity(0);
-            button.setMaxHeight(Double.MAX_VALUE);
-            button.setMaxWidth(Double.MAX_VALUE);
-            stackPane.getChildren().add(button);
 
             list.add(stackPane);
         }
@@ -113,6 +112,8 @@ public class ShopController implements Initializable
     {
         this.moto = moto;
         this.motoOwned = this.shopService.ownMoto(moto);
+        this.lblMoto.setText(moto.getName());
+        this.pbSpeedMoto.setProgress(moto.getSpeed() / 2);
         this.selectSkin(this.moto.getDefaultSkin());
         this.lblError.setText("");
     }
@@ -130,12 +131,10 @@ public class ShopController implements Initializable
         this.lblPrice.setText("" + (this.motoOwned ? skin.getPrice() : this.moto.getPrice()));
 
         this.iconLock.setVisible(!skinOwned);
-        if (!skinOwned)
-            this.paneSkin.getStyleClass().add("disable");
-        else
-            this.paneSkin.getStyleClass().clear();
-        this.lblPrice.setVisible(!skinOwned);
-        this.btnUnlock.setVisible(!skinOwned);
+        this.paneSkin.setOpacity(skinOwned ? 1 : 0.4);
+        this.lblPrice.setOpacity(skinOwned ? 0.4 : 1);
+        this.btnUnlock.setOpacity(skinOwned ? 0.4 : 1);
+        this.btnUnlock.setDisable(skinOwned);
     }
 
     public void prevSkin()
@@ -157,10 +156,12 @@ public class ShopController implements Initializable
                 this.selectSkin(this.skin);
             } else {
                 this.shopService.unlockMoto(this.moto);
-                this.selectMoto(this.moto);
+                Moto moto = this.moto;
+                this.initialize(null, null);
+                this.selectMoto(moto);
             }
 
-            this.updateCoins();
+            this.lblError.setText("");
         } catch (IllegalArgumentException e){ this.lblError.setText(e.getMessage()); }
     }
 

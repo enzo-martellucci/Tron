@@ -24,9 +24,3 @@
     -fx-border-radius: 5;
     -fx-cursor: hand;
 }
-
-.disable {
-    -fx-background-color: lightgrey;
-    -fx-background-radius: 5;
-    -fx-opacity: 0.4;
-}
