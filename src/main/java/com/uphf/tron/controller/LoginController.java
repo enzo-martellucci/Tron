@@ -13,7 +13,6 @@ public class LoginController
 {
     private final SceneController sceneController;
     private final SecurityService securityService;
-    private final ShopService shopService;
 
     @FXML
     private TextField txtUsername;
@@ -22,26 +21,23 @@ public class LoginController
     @FXML
     private Label lblError;
 
-    public LoginController(SceneController sceneController, SecurityService securityService, ShopService shopService)
+    public LoginController(SceneController sceneController, SecurityService securityService)
     {
         this.sceneController = sceneController;
         this.securityService = securityService;
-        this.shopService = shopService;
     }
 
     public void login()
     {
-        this.shopService.getAllMoto();
-
-//        try
-//        {
-//            this.securityService.login(this.txtUsername.getText(), this.txtPassword.getText());
-//            this.sceneController.setScene("home");
-//            this.txtUsername.clear();
-//            this.txtPassword.clear();
-//            this.lblError.setText("");
-//        }
-//        catch (IllegalArgumentException e){ this.lblError.setText(e.getMessage()); }
+        try
+        {
+            this.securityService.login(this.txtUsername.getText(), this.txtPassword.getText());
+            this.sceneController.setScene("home");
+            this.txtUsername.clear();
+            this.txtPassword.clear();
+            this.lblError.setText("");
+        }
+        catch (IllegalArgumentException e){ this.lblError.setText(e.getMessage()); }
     }
 
     public void goToRegister()

@@ -16,3 +16,17 @@
     -fx-pref-width: 0;
     -fx-pref-height: 0;
 }
+
+.moto-item {
+    -fx-padding: 20;
+    -fx-border-color: #598392;
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+    -fx-cursor: hand;
+}
+
+.disable {
+    -fx-background-color: lightgrey;
+    -fx-background-radius: 5;
+    -fx-opacity: 0.4;
+}

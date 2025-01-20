@@ -22,6 +22,7 @@ module com.uphf.tron {
     requires org.hibernate.orm.core;
     requires java.desktop;
     requires bcrypt;
+    requires spring.data.commons;
 
     opens com.uphf.tron.constants to spring.core;
     opens com.uphf.tron.controller to spring.core, javafx.fxml;
