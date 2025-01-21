@@ -45,7 +45,7 @@
                      </effect>
                   </Label>
                   <!-- StackPane contenant la moto et l'arrière-plan animé -->
-                  <StackPane fx:id="paneSkin" maxHeight="256" maxWidth="-256" style="-fx-border-color: WHITE;">
+                  <StackPane fx:id="paneSkin" maxHeight="256" maxWidth="-256" style="-fx-border-color: TRANSPARENT;">
                      <children>
                         <!-- Deux images pour créer l'effet de scrolling infini sous la moto -->
                         <ImageView fx:id="bgTile1" fitHeight="256.0" fitWidth="256.0" pickOnBounds="true" preserveRatio="true">
