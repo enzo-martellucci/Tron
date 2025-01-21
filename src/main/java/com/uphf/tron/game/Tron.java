@@ -6,16 +6,16 @@ import com.uphf.tron.game.constants.CellType;
 import com.uphf.tron.game.constants.Difficulty;
 import com.uphf.tron.game.constants.Direction;
 import com.uphf.tron.game.strategy.*;
+import javafx.scene.paint.Color;
 
 import java.util.List;
 
 public class Tron
 {
-    private static final int NB_ROW = 12;
-    private static final int NB_COL = 12;
-    private static final Position[] LST_START = new Position[]{ new Position(2, 2), new Position(9, 2), new Position(2, 9), new Position(9, 9) };
-    private static final Direction[] LST_DIRECTION = new Direction[]{ Direction.RIGHT, Direction.DOWN, Direction.UP, Direction.LEFT };
-
+    public static final int NB_ROW = 20;
+    public static final int NB_COL = 20;
+    private static final Position[] LST_START = new Position[]{ new Position(4, 4), new Position(NB_COL - 3, 5), new Position(2, NB_ROW - 2), new Position(NB_COL - 3, NB_ROW - 5) };
+    private static final Direction[] LST_DIRECTION = new Direction[]{ Direction.DOWN, Direction.DOWN, Direction.LEFT, Direction.LEFT };
 
     private Cell[][] grid;
     private Rider[] lstRider;
@@ -32,11 +32,28 @@ public class Tron
         for (int i = 0; i < lstAIMoto.size(); i++)
             this.lstRider[i + 1] = new Rider(this, this.getStrategy(lstAIDifficulty.get(i)), LST_START[i + 1], LST_DIRECTION[i + 1], lstAIMoto.get(i), lstAISkin.get(i));
 
-        for (Rider rider : this.lstRider)
+        this.grid[2][2] = new Cell(CellType.HORIZONTAL, Color.valueOf(skin.getColor()));
+        this.grid[3][2] = new Cell(CellType.HORIZONTAL, Color.valueOf(skin.getColor()));
+        this.grid[4][2] = new Cell(CellType.DOWN_TO_LEFT, Color.valueOf(skin.getColor()));
+        this.grid[4][3] = new Cell(CellType.VERTICAL, Color.valueOf(skin.getColor()));
+
+        this.grid[NB_ROW - 3][2] = new Cell(CellType.VERTICAL, this.lstRider[1].getColor());
+        this.grid[NB_ROW - 3][3] = new Cell(CellType.VERTICAL, this.lstRider[1].getColor());
+        this.grid[NB_ROW - 3][4] = new Cell(CellType.VERTICAL, this.lstRider[1].getColor());
+
+        if (this.lstRider.length > 2)
         {
-            Position p = rider.getPosition();
-            this.grid[p.getX()][p.getY()].setCellType(Direction.getCellType(rider.getPrevDirection(), rider.getNextDirection()));
-            this.grid[p.getX()][p.getY()].setColor(rider.getColor());
+            this.grid[2][NB_ROW - 3] = new Cell(CellType.HORIZONTAL, this.lstRider[2].getColor());
+            this.grid[3][NB_ROW - 3] = new Cell(CellType.HORIZONTAL, this.lstRider[2].getColor());
+            this.grid[4][NB_ROW - 3] = new Cell(CellType.DOWN_TO_LEFT, this.lstRider[2].getColor());
+            this.grid[4][NB_ROW - 2] = new Cell(CellType.LEFT_TO_UP, this.lstRider[2].getColor());
+            this.grid[3][NB_ROW - 2] = new Cell(CellType.HORIZONTAL, this.lstRider[2].getColor());
+        }
+
+        if (this.lstRider.length > 3)
+        {
+            this.grid[NB_COL - 3][NB_ROW - 3] = new Cell(CellType.VERTICAL, this.lstRider[3].getColor());
+            this.grid[NB_COL - 3][NB_ROW - 4] = new Cell(CellType.VERTICAL, this.lstRider[3].getColor());
         }
     }
 
@@ -73,7 +90,7 @@ public class Tron
         if (nextX < 0 || nextX >= this.grid.length || nextY < 0 || nextY >= this.grid[0].length)
             rider.stop();
 
-        this.grid[x][y].setCellType(Direction.getCellType(rider.getPrevDirection(), rider.getNextDirection()));
+        this.grid[x][y].setCellType(CellType.getCellType(rider.getPrevDirection(), rider.getNextDirection()));
         this.grid[x][y].setColor(rider.getColor());
         rider.setPrevDirection(rider.getNextDirection());
         rider.setPosition(next);

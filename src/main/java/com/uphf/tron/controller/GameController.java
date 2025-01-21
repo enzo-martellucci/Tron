@@ -26,10 +26,12 @@ public class GameController implements Initializable
     private static final Color BACKGROUND_COLOR = Color.rgb(1, 22, 30);
     private static final Color TILE_COLOR = Color.rgb(89, 131, 146);
     private static final double GUTTER = 5;
-    private static final double TRAIL = 10;
+    private static final double TRAIL = 7;
     private static final double HALF_TRAIL = TRAIL / 2;
 
     private final SceneController sceneController;
+
+    private AnimationTimer animation;
 
     private Tron tron;
     private HumanStrategy strategy;
@@ -40,6 +42,15 @@ public class GameController implements Initializable
     public GameController(SceneController sceneController)
     {
         this.sceneController = sceneController;
+
+        this.animation = new AnimationTimer()
+        {
+            @Override
+            public void handle(long l)
+            {
+                System.out.println(l);
+            }
+        };
     }
 
     public void init(Moto moto, Skin skin, List<Moto> lstAIMoto, List<Skin> lstAISkin, List<Difficulty> lstAIDifficulty)
@@ -51,16 +62,7 @@ public class GameController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-        this.tron.start();
-        AnimationTimer animationTimer = new AnimationTimer()
-        {
-            @Override
-            public void handle(long l)
-            {
-                GameController.this.repaint();
-            }
-        };
-        animationTimer.start();
+        this.repaint();
     }
 
     public void repaint()
@@ -140,5 +142,10 @@ public class GameController implements Initializable
             g.drawImage(rider.getImage(), -cell / 2, -cell / 2, cell, cell);
             g.restore();
         }
+    }
+
+    public void goToHome()
+    {
+        this.sceneController.setScene("home");
     }
 }

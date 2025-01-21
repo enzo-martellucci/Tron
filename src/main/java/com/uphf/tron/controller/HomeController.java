@@ -8,12 +8,14 @@ public class HomeController
 {
     private final SceneController sceneController;
     private final SelectionController selectionController;
+    private final ShopController shopController;
     private final SecurityService securityService;
 
-    public HomeController(SceneController sceneController, SelectionController selectionController, SecurityService securityService)
+    public HomeController(SceneController sceneController, SelectionController selectionController, ShopController shopController, SecurityService securityService)
     {
         this.sceneController = sceneController;
         this.selectionController = selectionController;
+        this.shopController = shopController;
         this.securityService = securityService;
     }
 
@@ -26,6 +28,7 @@ public class HomeController
     public void goToShop()
     {
         this.sceneController.setScene("shop");
+        this.shopController.initialize(null, null);
     }
 
     public void goToLeaderboard()

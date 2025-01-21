@@ -3,6 +3,7 @@ package com.uphf.tron.controller;
 import com.uphf.tron.entity.Moto;
 import com.uphf.tron.entity.Skin;
 import com.uphf.tron.service.ShopService;
+import javafx.animation.TranslateTransition;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,22 +17,15 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 import org.kordamp.ikonli.fontawesome5.FontAwesomeSolid;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.springframework.stereotype.Controller;
 
 import java.io.ByteArrayInputStream;
 import java.net.URL;
-import java.util.List;
-import javafx.scene.shape.Rectangle;
-
 import java.util.ResourceBundle;
 import java.util.SortedMap;
-
-import javafx.animation.TranslateTransition;
-import javafx.fxml.FXML;
-import javafx.scene.image.ImageView;
-import javafx.util.Duration;
 
 
 @Controller
@@ -132,9 +126,6 @@ public class ShopController implements Initializable
         transition1.play();
         transition2.play();
     }
-
-
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)

@@ -34,7 +34,6 @@ public class LoginController
         {
             this.securityService.login(this.txtUsername.getText(), this.txtPassword.getText());
             this.clear();
-            this.shopController.initialize(null, null);
             this.sceneController.setScene("home");
         }
         catch (IllegalArgumentException e){ this.lblError.setText(e.getMessage()); }

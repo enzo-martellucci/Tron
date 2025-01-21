@@ -19,7 +19,7 @@ public class SceneController
     @Autowired
     private SecurityService securityService;
 
-    private static final String INITIAL_SCENE = "shop";
+    private static final String INITIAL_SCENE = "login";
 
     private ApplicationContext applicationContext;
 
@@ -36,7 +36,6 @@ public class SceneController
         this.stage.setScene(this.scene);
 
         this.mapScene = new HashMap<>();
-        this.securityService.login("Enzo", "123456");
         this.setScene(INITIAL_SCENE);
 
         stage.setTitle("Tron");
