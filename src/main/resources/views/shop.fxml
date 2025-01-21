@@ -65,7 +65,7 @@
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" spacing="20.0" StackPane.alignment="TOP_CENTER">
                            <children>
                               <FontIcon iconColor="WHITE" iconLiteral="fas-tachometer-alt" iconSize="16" />
-                              <ProgressBar fx:id="pbSpeedMoto" maxWidth="1.7976931348623157E308" prefHeight="10.0" progress="0.45" HBox.hgrow="ALWAYS" />
+                              <ProgressBar fx:id="pbSpeed" maxWidth="1.7976931348623157E308" prefHeight="10.0" progress="0.45" HBox.hgrow="ALWAYS" />
                            </children>
                            <padding>
                               <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />

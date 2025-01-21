@@ -1,4 +1,4 @@
-package com.uphf.tron.constants;
+package com.uphf.tron.game.constants;
 
 public enum Difficulty {
     EASY,

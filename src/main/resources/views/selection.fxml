@@ -2,8 +2,12 @@
 
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -13,8 +17,8 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
-
 
 <StackPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uphf.tron.controller.SelectionController">
    <children>
@@ -35,19 +39,252 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <VBox prefHeight="200.0" prefWidth="100.0" styleClass="cell">
+                  <HBox alignment="CENTER" spacing="10.0" styleClass="player-cell">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
                      <children>
-                        <StackPane>
+                        <StackPane maxHeight="-Infinity" maxWidth="-Infinity" HBox.hgrow="ALWAYS">
                            <children>
-                              <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                              <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/images/tile.png" />
+                                 </image>
+                                 <viewport>
+                                    <Rectangle2D />
+                                 </viewport>
+                              </ImageView>
+                              <ImageView fx:id="viewMoto" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/images/basic.png" />
+                                 </image>
+                              </ImageView>
+                              <Rectangle fx:id="rectTrail" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="50.0" stroke="BLACK" strokeType="INSIDE" width="18.0" StackPane.alignment="BOTTOM_CENTER" />
                            </children>
                         </StackPane>
+                        <VBox alignment="CENTER" spacing="20.0" HBox.hgrow="NEVER">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                           <children>
+                              <Label fx:id="lblName" styleClass="text-lg" text="Label" textFill="WHITE" />
+                              <HBox alignment="CENTER" spacing="10.0">
+                                 <children>
+                                    <ProgressBar fx:id="pbSpeed" prefWidth="200.0" progress="0.68" />
+                                    <FontIcon iconColor="WHITE" iconLiteral="fas-tachometer-alt" iconSize="16" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets left="10.0" right="10.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox alignment="CENTER" maxHeight="-Infinity" spacing="5.0">
+                                 <children>
+                                    <Button mnemonicParsing="false" onAction="#prevMoto" style="-fx-background-color: transparent;">
+                                       <graphic>
+                                          <FontIcon iconColor="WHITE" iconLiteral="fas-angle-left" iconSize="40" />
+                                       </graphic>
+                                    </Button>
+                                    <Label fx:id="lblMoto" alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="text-md" text="Phantom" textFill="WHITE" HBox.hgrow="SOMETIMES" />
+                                    <Button mnemonicParsing="false" onAction="#nextMoto" style="-fx-background-color: transparent;">
+                                       <graphic>
+                                          <FontIcon iconColor="WHITE" iconLiteral="fas-angle-right" iconSize="40" />
+                                       </graphic>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" maxHeight="-Infinity" spacing="5.0">
+                                 <children>
+                                    <Button mnemonicParsing="false" onAction="#prevSkin" style="-fx-background-color: transparent;">
+                                       <graphic>
+                                          <FontIcon iconColor="WHITE" iconLiteral="fas-angle-left" iconSize="40" />
+                                       </graphic>
+                                    </Button>
+                                    <Label fx:id="lblSkin" alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="text-md" text="Burgundy" textFill="WHITE" HBox.hgrow="SOMETIMES" />
+                                    <Button mnemonicParsing="false" onAction="#nextSkin" style="-fx-background-color: transparent;">
+                                       <graphic>
+                                          <FontIcon iconColor="WHITE" iconLiteral="fas-angle-right" iconSize="40" />
+                                       </graphic>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <VBox fx:id="emptyAI1" alignment="CENTER" styleClass="ai-cell" visible="false" GridPane.columnIndex="1">
+                     <children>
+                        <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#addAI1" style="-fx-background-color: transparent;" VBox.vgrow="ALWAYS">
+                           <graphic>
+                              <FontIcon iconColor="WHITE" iconLiteral="fas-plus" iconSize="120" />
+                           </graphic>
+                        </Button>
                      </children>
                   </VBox>
-                  <VBox prefHeight="200.0" prefWidth="100.0" styleClass="cell" GridPane.columnIndex="1" />
-                  <VBox prefHeight="200.0" prefWidth="100.0" styleClass="cell" GridPane.rowIndex="1" />
-                  <VBox prefHeight="200.0" prefWidth="100.0" styleClass="cell" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <HBox fx:id="fullAI1" alignment="CENTER" styleClass="ai-cell" GridPane.columnIndex="1">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                     <children>
+                        <StackPane maxHeight="-Infinity" maxWidth="-Infinity" HBox.hgrow="NEVER">
+                           <children>
+                              <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/images/tile.png" />
+                                 </image>
+                                 <viewport>
+                                    <Rectangle2D />
+                                 </viewport>
+                              </ImageView>
+                              <ImageView fx:id="viewAI1Moto" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/images/basic.png" />
+                                 </image>
+                              </ImageView>
+                              <Rectangle fx:id="rectAI1Trail" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="50.0" stroke="BLACK" strokeType="INSIDE" width="18.0" StackPane.alignment="BOTTOM_CENTER" />
+                           </children>
+                        </StackPane>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0" HBox.hgrow="ALWAYS">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                           <children>
+                              <Label fx:id="lblAI1Name" styleClass="text-lg" text="Label" textFill="WHITE" />
+                              <HBox alignment="CENTER">
+                                 <children>
+                                    <Button mnemonicParsing="false" onAction="#prevAI1Difficulty" style="-fx-background-color: transparent;">
+                                       <graphic>
+                                          <FontIcon iconColor="WHITE" iconLiteral="fas-angle-left" iconSize="60" />
+                                       </graphic>
+                                    </Button>
+                                    <Label fx:id="lblAI1Difficulty" alignment="CENTER" maxWidth="200.0" styleClass="text-lg" text="Easy" textFill="WHITE" HBox.hgrow="SOMETIMES" />
+                                    <Button mnemonicParsing="false" onAction="#nextAI1Difficulty" style="-fx-background-color: transparent;">
+                                       <graphic>
+                                          <FontIcon iconColor="WHITE" iconLiteral="fas-angle-right" iconSize="60" />
+                                       </graphic>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                              <Button mnemonicParsing="false" onAction="#removeAI1" text="Remove" visible="false" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <VBox fx:id="emptyAI2" alignment="CENTER" styleClass="ai-cell" visible="false" GridPane.rowIndex="1">
+                     <children>
+                        <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#addAI2" style="-fx-background-color: transparent;" VBox.vgrow="ALWAYS">
+                           <graphic>
+                              <FontIcon iconColor="WHITE" iconLiteral="fas-plus" iconSize="120" />
+                           </graphic>
+                        </Button>
+                     </children>
+                  </VBox>
+                  <HBox fx:id="fullAI2" alignment="CENTER" styleClass="ai-cell" GridPane.hgrow="NEVER" GridPane.rowIndex="1">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                     <children>
+                        <StackPane maxHeight="-Infinity" maxWidth="-Infinity" HBox.hgrow="NEVER">
+                           <children>
+                              <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/images/tile.png" />
+                                 </image>
+                                 <viewport>
+                                    <Rectangle2D />
+                                 </viewport>
+                              </ImageView>
+                              <ImageView fx:id="viewAI2Moto" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/images/basic.png" />
+                                 </image>
+                              </ImageView>
+                              <Rectangle fx:id="rectAI2Trail" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="50.0" stroke="BLACK" strokeType="INSIDE" width="18.0" StackPane.alignment="BOTTOM_CENTER" />
+                           </children>
+                        </StackPane>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0" HBox.hgrow="ALWAYS">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                           <children>
+                              <Label fx:id="lblAI2Name" styleClass="text-lg" text="Label" textFill="WHITE" />
+                              <HBox alignment="CENTER">
+                                 <children>
+                                    <Button mnemonicParsing="false" onAction="#prevAI2Difficulty" style="-fx-background-color: transparent;">
+                                       <graphic>
+                                          <FontIcon iconColor="WHITE" iconLiteral="fas-angle-left" iconSize="60" />
+                                       </graphic>
+                                    </Button>
+                                    <Label fx:id="lblAI2Difficulty" alignment="CENTER" maxWidth="200.0" styleClass="text-lg" text="Medium" textFill="WHITE" HBox.hgrow="ALWAYS" />
+                                    <Button mnemonicParsing="false" onAction="#nextAI2Difficulty" style="-fx-background-color: transparent;">
+                                       <graphic>
+                                          <FontIcon iconColor="WHITE" iconLiteral="fas-angle-right" iconSize="60" />
+                                       </graphic>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                              <Button mnemonicParsing="false" onAction="#removeAI2" text="Remove" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <VBox fx:id="emptyAI3" alignment="CENTER" styleClass="ai-cell" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <children>
+                        <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#addAI3" style="-fx-background-color: transparent;" VBox.vgrow="ALWAYS">
+                           <graphic>
+                              <FontIcon iconColor="WHITE" iconLiteral="fas-plus" iconSize="120" />
+                           </graphic>
+                        </Button>
+                     </children>
+                  </VBox>
+                  <HBox fx:id="fullAI3" alignment="CENTER" styleClass="ai-cell" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                     <children>
+                        <StackPane maxHeight="-Infinity" maxWidth="-Infinity" HBox.hgrow="NEVER">
+                           <children>
+                              <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/images/tile.png" />
+                                 </image>
+                                 <viewport>
+                                    <Rectangle2D />
+                                 </viewport>
+                              </ImageView>
+                              <ImageView fx:id="viewAI3Moto" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/images/basic.png" />
+                                 </image>
+                              </ImageView>
+                              <Rectangle fx:id="rectAI3Trail" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="50.0" stroke="BLACK" strokeType="INSIDE" width="18.0" StackPane.alignment="BOTTOM_CENTER" />
+                           </children>
+                        </StackPane>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0" HBox.hgrow="ALWAYS">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                           <children>
+                              <Label fx:id="lblAI3Name" styleClass="text-lg" text="Label" textFill="WHITE" />
+                              <HBox alignment="CENTER">
+                                 <children>
+                                    <Button mnemonicParsing="false" onAction="#prevAI3Difficulty" style="-fx-background-color: transparent;">
+                                       <graphic>
+                                          <FontIcon iconColor="WHITE" iconLiteral="fas-angle-left" iconSize="60" />
+                                       </graphic>
+                                    </Button>
+                                    <Label fx:id="lblAI3Difficulty" alignment="CENTER" maxWidth="200.0" styleClass="text-lg" text="Medium" textFill="WHITE" HBox.hgrow="ALWAYS" />
+                                    <Button mnemonicParsing="false" onAction="#nextAI3Difficulty" style="-fx-background-color: transparent;">
+                                       <graphic>
+                                          <FontIcon iconColor="WHITE" iconLiteral="fas-angle-right" iconSize="60" />
+                                       </graphic>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                              <Button mnemonicParsing="false" onAction="#removeAI3" text="Remove" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
                </children>
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

@@ -1,132 +1,144 @@
 package com.uphf.tron.controller;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
+import com.uphf.tron.entity.Moto;
+import com.uphf.tron.entity.Skin;
+import com.uphf.tron.game.Cell;
+import com.uphf.tron.game.Position;
+import com.uphf.tron.game.Rider;
+import com.uphf.tron.game.Tron;
+import com.uphf.tron.game.constants.Difficulty;
+import com.uphf.tron.game.strategy.HumanStrategy;
+import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
+import javafx.fxml.Initializable;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
-import javafx.util.Duration;
 import org.springframework.stereotype.Controller;
 
+import java.net.URL;
+import java.util.List;
+import java.util.ResourceBundle;
+
 @Controller
-public class GameController {
+public class GameController implements Initializable
+{
+    private static final Color BACKGROUND_COLOR = Color.rgb(1, 22, 30);
+    private static final Color TILE_COLOR = Color.rgb(89, 131, 146);
+    private static final double GUTTER = 5;
+    private static final double TRAIL = 10;
+    private static final double HALF_TRAIL = TRAIL / 2;
 
-    private static final int GRID_SIZE = 20; // Taille de la grille
-    private static final int CELL_SIZE = 30; // Taille des cellules
+    private final SceneController sceneController;
 
-    private Rectangle[][] grid = new Rectangle[GRID_SIZE][GRID_SIZE];
-    private int playerX = 0; // Position X du joueur
-    private int playerY = 0; // Position Y du joueur
-    private char direction = 'S'; // Direction initiale du joueur
+    private Tron tron;
+    private HumanStrategy strategy;
 
     @FXML
-    private AnchorPane anchorPane; // Lié à l'élément FXML AnchorPane
+    private Canvas canvas;
 
-    @FXML
-    public void initialize() {
-        System.out.println("Initializing GameController...");
-        if (anchorPane == null) {
-            throw new IllegalStateException("AnchorPane is not injected properly!");
-        }
+    public GameController(SceneController sceneController)
+    {
+        this.sceneController = sceneController;
+    }
 
-        initializeGame();
+    public void init(Moto moto, Skin skin, List<Moto> lstAIMoto, List<Skin> lstAISkin, List<Difficulty> lstAIDifficulty)
+    {
+        this.tron = new Tron(moto, skin, lstAIMoto, lstAISkin, lstAIDifficulty);
+        this.strategy = this.tron.getHumanStrategy();
+    }
 
-        // Attendre que la scène soit attachée pour configurer les événements
-        anchorPane.sceneProperty().addListener((observable, oldScene, newScene) -> {
-            if (newScene != null) {
-                newScene.setOnKeyPressed(event -> setDirection(event.getCode().toString()));
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle)
+    {
+        this.tron.start();
+        AnimationTimer animationTimer = new AnimationTimer()
+        {
+            @Override
+            public void handle(long l)
+            {
+                GameController.this.repaint();
             }
-        });
+        };
+        animationTimer.start();
     }
 
-    private void initializeGame() {
-        System.out.println("Initializing game grid...");
+    public void repaint()
+    {
+        GraphicsContext g = this.canvas.getGraphicsContext2D();
 
-        // Créer un GridPane pour la grille
-        GridPane gridPane = new GridPane();
+        Cell[][] grid = this.tron.getGrid();
+        Rider[] lstRider = this.tron.getLstRider();
 
-        // Initialiser la grille avec des rectangles
-        for (int row = 0; row < GRID_SIZE; row++) {
-            for (int col = 0; col < GRID_SIZE; col++) {
-                Rectangle cell = new Rectangle(CELL_SIZE, CELL_SIZE);
-                cell.setFill(Color.GRAY); // Couleur par défaut des cellules
-                cell.setStroke(Color.BLACK); // Bordures des cellules
-                grid[row][col] = cell;
-                gridPane.add(cell, col, row);
+        int row = grid.length, col = grid[0].length;
+        double w = canvas.getWidth(), h = canvas.getHeight();
+        double cell = Math.min((w - (row - 1) * GUTTER) / row, (h - (col - 1) * GUTTER) / col);
+        double half = cell / 2;
+        double full = cell + GUTTER;
+
+        // Painting Background
+        g.setFill(BACKGROUND_COLOR);
+        g.fillRect(0, 0, w, h);
+
+        // Painting Tiles
+        g.setFill(TILE_COLOR);
+
+        g.save();
+        g.translate((-w / row) / 2, (-h / col) / 2);
+        for (int r = 0; r <= row; r++)
+            for (int c = 0; c <= col; c++)
+                g.strokeRoundRect(r * full, c * full, cell, cell, 5, 5);
+        g.restore();
+
+        // Painting Walls
+        for (int r = 0; r < grid.length; r++)
+            for (int c = 0; c < grid[0].length; c++)
+            {
+                g.setFill(grid[r][c].getColor());
+                switch (grid[r][c].getCellType())
+                {
+                    case HORIZONTAL -> g.fillRect(r * full, c * full + half - HALF_TRAIL, cell, TRAIL);
+                    case VERTICAL -> g.fillRect(r * full + half - HALF_TRAIL, c * full, TRAIL, cell);
+                    case LEFT_TO_UP ->
+                    {
+                        g.fillRect(r * full, c * full + half - HALF_TRAIL, half + HALF_TRAIL, TRAIL);
+                        g.fillRect(r * full + half - HALF_TRAIL, c * full, TRAIL, half + HALF_TRAIL);
+                    }
+                    case UP_TO_RIGHT ->
+                    {
+                        g.fillRect(r * full + half - HALF_TRAIL, c * full + half - HALF_TRAIL, half + HALF_TRAIL, TRAIL);
+                        g.fillRect(r * full + half - HALF_TRAIL, c * full, TRAIL, cell / 2 + HALF_TRAIL);
+                    }
+                    case RIGHT_TO_DOWN ->
+                    {
+                        g.fillRect(r * full + half - HALF_TRAIL, c * full + half - HALF_TRAIL, half + HALF_TRAIL, TRAIL);
+                        g.fillRect(r * full + half - HALF_TRAIL, c * full + half - HALF_TRAIL, TRAIL, cell / 2 + HALF_TRAIL);
+                    }
+                    case DOWN_TO_LEFT ->
+                    {
+                        g.fillRect(r * full, c * full + half - HALF_TRAIL, half + HALF_TRAIL, TRAIL);
+                        g.fillRect(r * full + half - HALF_TRAIL, c * full + half - HALF_TRAIL, TRAIL, cell / 2 + HALF_TRAIL);
+                    }
+                }
             }
+
+        // Painting Motos
+        for (Rider rider : lstRider)
+        {
+            Position p = rider.getPosition();
+            double x = p.getX() * full;
+            double y = p.getY() * full;
+
+            g.save();
+            g.translate(x + cell / 2, y + cell / 2);
+            switch (rider.getNextDirection())
+            {
+                case LEFT -> g.rotate(270);
+                case DOWN -> g.rotate(180);
+                case RIGHT -> g.rotate(90);
+            }
+            g.drawImage(rider.getImage(), -cell / 2, -cell / 2, cell, cell);
+            g.restore();
         }
-
-        // Marquer la position initiale du joueur
-        grid[playerY][playerX].setFill(Color.WHITE);
-
-        // Ajouter le GridPane dans l'AnchorPane
-        anchorPane.getChildren().clear(); // Nettoyer les enfants existants
-        anchorPane.getChildren().add(gridPane);
-
-        // Ajuster le GridPane dans l'AnchorPane
-        AnchorPane.setTopAnchor(gridPane, 0.0);
-        AnchorPane.setBottomAnchor(gridPane, 0.0);
-        AnchorPane.setLeftAnchor(gridPane, 0.0);
-        AnchorPane.setRightAnchor(gridPane, 0.0);
-
-        System.out.println("Game grid initialized and added to AnchorPane.");
-
-        // Configurer la Timeline pour mettre à jour la position du joueur
-        Timeline timeline = new Timeline(
-                new KeyFrame(Duration.seconds(0.25), event -> movePlayer(direction))
-        );
-        timeline.setCycleCount(Timeline.INDEFINITE); // Répéter indéfiniment
-        timeline.play(); // Démarrer la Timeline
-    }
-
-    private void setDirection(String key) {
-        switch (key) {
-            case "W": // Haut (ou Z selon votre clavier)
-            case "Z":
-                direction = 'Z';
-                break;
-            case "S": // Bas
-                direction = 'S';
-                break;
-            case "A": // Gauche (ou Q selon votre clavier)
-            case "Q":
-                direction = 'Q';
-                break;
-            case "D": // Droite
-                direction = 'D';
-                break;
-            default:
-                // Ne rien faire si la touche est invalide
-                break;
-        }
-    }
-
-    private void movePlayer(char direction) {
-        // Réinitialiser la position actuelle du joueur (remettre en gris)
-        grid[playerY][playerX].setFill(Color.GRAY);
-
-        // Déplacer le joueur en fonction de la direction
-        switch (direction) {
-            case 'Z': // Haut
-                if (playerY > 0) playerY--;
-                break;
-            case 'S': // Bas
-                if (playerY < GRID_SIZE - 1) playerY++;
-                break;
-            case 'Q': // Gauche
-                if (playerX > 0) playerX--;
-                break;
-            case 'D': // Droite
-                if (playerX < GRID_SIZE - 1) playerX++;
-                break;
-            default:
-                // Ne rien faire si la direction est invalide
-                break;
-        }
-
-        // Mettre à jour la nouvelle position du joueur
-        grid[playerY][playerX].setFill(Color.WHITE);
     }
 }

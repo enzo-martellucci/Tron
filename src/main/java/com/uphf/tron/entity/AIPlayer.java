@@ -1,6 +1,6 @@
 package com.uphf.tron.entity;
 
-import com.uphf.tron.constants.Difficulty;
+import com.uphf.tron.game.constants.Difficulty;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

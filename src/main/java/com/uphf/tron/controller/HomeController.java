@@ -7,17 +7,20 @@ import org.springframework.stereotype.Controller;
 public class HomeController
 {
     private final SceneController sceneController;
+    private final SelectionController selectionController;
     private final SecurityService securityService;
 
-    public HomeController(SceneController sceneController, SecurityService securityService)
+    public HomeController(SceneController sceneController, SelectionController selectionController, SecurityService securityService)
     {
         this.sceneController = sceneController;
+        this.selectionController = selectionController;
         this.securityService = securityService;
     }
 
     public void goToPlay()
     {
         this.sceneController.setScene("selection");
+        this.selectionController.initialize(null, null);
     }
 
     public void goToShop()

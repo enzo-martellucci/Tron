@@ -23,18 +23,23 @@ module com.uphf.tron {
     requires java.desktop;
     requires bcrypt;
     requires spring.data.commons;
+    requires jdk.xml.dom;
 
-    opens com.uphf.tron.constants to spring.core;
+    opens com.uphf.tron.game.constants to spring.core;
+    opens com.uphf.tron.game to spring.core;
     opens com.uphf.tron.controller to spring.core, javafx.fxml;
     opens com.uphf.tron.service to spring.core;
     opens com.uphf.tron.entity to spring.core, org.hibernate.orm.core;
     opens com.uphf.tron.repository to spring.core;
     opens com.uphf.tron to spring.core, javafx.fxml;
 
-    exports com.uphf.tron.constants;
+    exports com.uphf.tron.game.constants;
+    exports com.uphf.tron.game;
     exports com.uphf.tron.controller;
     exports com.uphf.tron.service;
     exports com.uphf.tron.entity;
     exports com.uphf.tron.repository;
     exports com.uphf.tron;
+    exports com.uphf.tron.game.strategy;
+    opens com.uphf.tron.game.strategy to spring.core;
 }

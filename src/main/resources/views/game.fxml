@@ -1,4 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.AnchorPane?>
-<AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uphf.tron.controller.GameController" />
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+
+<StackPane prefHeight="600.0" prefWidth="1000.0" stylesheets="@../assets/styles/global.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uphf.tron.controller.GameController">
+   <children>
+      <Region maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="bg-grid">
+         <effect>
+            <ColorAdjust brightness="-0.6" />
+         </effect>
+      </Region>
+      <Canvas fx:id="canvas" height="600.0" opacity="0.9" width="600.0" />
+   </children>
+</StackPane>

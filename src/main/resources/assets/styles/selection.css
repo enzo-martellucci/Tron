@@ -1,5 +1,13 @@
-.cell {
+.player-cell {
+    -fx-background-color: rgba(1, 22, 30, 0.5);
+    -fx-border-color: white;
+    -fx-border-width: 3;
+    -fx-border-radius: 5;
+}
+
+.ai-cell {
     -fx-background-color: rgba(1, 22, 30, 0.5);
     -fx-border-color: #598392;
+    -fx-border-width: 3;
     -fx-border-radius: 5;
 }

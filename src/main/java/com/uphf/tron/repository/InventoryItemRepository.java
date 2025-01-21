@@ -11,6 +11,7 @@ import java.util.Optional;
 public interface InventoryItemRepository extends JpaRepository<InventoryItem, InventoryItemId>
 {
     List<InventoryItem> findDistinctMotoByInventory(Inventory inventory);
+    List<InventoryItem> findDistinctSkinByInventoryAndMoto(Inventory inventory, Moto moto);
     Optional<InventoryItem> findFirstByInventoryAndSkin(Inventory inventory, Skin skin);
     Optional<InventoryItem> findFirstByInventoryAndMoto(Inventory inventory, Moto moto);
 }

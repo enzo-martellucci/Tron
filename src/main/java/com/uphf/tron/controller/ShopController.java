@@ -43,7 +43,7 @@ public class ShopController implements Initializable
     @FXML
     private Label lblMoto;
     @FXML
-    private ProgressBar pbSpeedMoto;
+    private ProgressBar pbSpeed;
 
     @FXML
     private StackPane paneSkin;
@@ -113,7 +113,7 @@ public class ShopController implements Initializable
         this.moto = moto;
         this.motoOwned = this.shopService.ownMoto(moto);
         this.lblMoto.setText(moto.getName());
-        this.pbSpeedMoto.setProgress(moto.getSpeed() / 2);
+        this.pbSpeed.setProgress(moto.getSpeed() / 2);
         this.selectSkin(this.moto.getDefaultSkin());
         this.lblError.setText("");
     }
