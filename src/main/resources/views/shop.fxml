@@ -44,9 +44,16 @@
                         <Glow level="0.75" />
                      </effect>
                   </Label>
-                  <StackPane fx:id="paneSkin" maxHeight="-Infinity" maxWidth="-Infinity" style="-fx-border-color: WHITE;">
+                  <!-- StackPane contenant la moto et l'arrière-plan animé -->
+                  <StackPane fx:id="paneSkin" maxHeight="256" maxWidth="-256" style="-fx-border-color: WHITE;">
                      <children>
-                        <ImageView fitHeight="256.0" fitWidth="256.0" pickOnBounds="true" preserveRatio="true">
+                        <!-- Deux images pour créer l'effet de scrolling infini sous la moto -->
+                        <ImageView fx:id="bgTile1" fitHeight="256.0" fitWidth="256.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/images/tile.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="bgTile2" fitHeight="256.0" fitWidth="256.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../assets/images/tile.png" />
                            </image>
@@ -57,6 +64,7 @@
                            </StackPane.margin>
                         </Rectangle>
                         <ImageView fx:id="viewSkin" fitHeight="128.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true">
+                        <!-- Moto qui reste au centre -->
                            <image>
                               <Image url="@../assets/images/basic.png" />
                            </image>
